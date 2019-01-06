@@ -1,0 +1,5 @@
+set colored-stats on
+set completion-ignore-case on
+set expand-tilde on
+set menu-complete-display-prefix on
+set show-all-if-ambiguous on

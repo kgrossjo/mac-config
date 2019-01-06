@@ -1,0 +1,2 @@
+bind status	c	!git commit
+set status-show-untracked-files = yes
