@@ -1,0 +1,3 @@
+Exception: TypeError: to_modifiers is not a function. (In 'to_modifiers(to, to_modifiers)', 'to_modifiers' is an instance of Array)
+remap_vinav_with_modifiers@./config.js:76:25
+global code@./config.js:196:47
