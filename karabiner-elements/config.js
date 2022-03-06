@@ -43,7 +43,7 @@ function with_exact_modifiers(key_code, modifiers) {
     };
 }
 
-function to_modifiers(key_code, modifiers) {
+function remap_to_modifiers(key_code, modifiers) {
     return {
         key_code: key_code,
         modifiers: modifiers,
@@ -73,7 +73,7 @@ function remap_vinav_with_modifiers(from, from_modifiers, to, to_modifiers) {
         conditions: [ variable_if("vinav", 1) ],
         from: with_exact_modifiers(from, from_modifiers),
         to: [
-            to_modifiers(to, to_modifiers)
+            remap_to_modifiers(to, to_modifiers)
         ],
         type: "basic",
     };
@@ -84,7 +84,7 @@ function remap_vinav_with_modifiers_and_exit(from, from_modifiers, to, to_modifi
         conditions: [ variable_if("vinav", 1) ],
         from: with_exact_modifiers(from, from_modifiers),
         to: [
-            to_modifiers(to, to_modifiers),
+            remap_to_modifiers(to, to_modifiers),
             set_variable("vinav", 0),
             show_message(""),
         ],
