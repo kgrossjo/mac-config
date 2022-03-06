@@ -343,6 +343,230 @@ let vinav_rules = {
     }
 };
 
+function remap_spc_key(from, to) {
+    return {
+        conditions: [ variable_if("spc_down", 1) ],
+        from: with_any_modifier(from),
+        to: [{key_code: to}],
+        type: "basic",
+    };
+}
+
+function remap_spc_with_modifiers(from, from_modifiers, to, to_modifiers) {
+    return {
+        conditions: [ variable_if("spc_down", 1) ],
+        from: with_exact_modifiers(from, from_modifiers),
+        to: [
+            remap_to_modifiers(to, to_modifiers)
+        ],
+        type: "basic",
+    };
+}
+
+let spc_rules = {
+    "complex_modifications": {
+        "parameters": {
+            "basic.simultaneous_threshold_milliseconds": 50,
+            "basic.to_delayed_action_delay_milliseconds": 500,
+            "basic.to_if_alone_timeout_milliseconds": 1000,
+            "basic.to_if_held_down_threshold_milliseconds": 300,
+            "mouse_motion_to_scroll.speed": 100
+        },
+        "rules": [
+            {
+                "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
+                "manipulators": [
+                    {
+                        "from": with_any_modifier("caps_lock"),
+                        "to": [
+                            {
+                                "key_code": "left_control"
+                            }
+                        ],
+                        "to_if_alone": [
+                            {
+                                "key_code": "escape"
+                            }
+                        ],
+                        "type": "basic"
+                    }
+                ]
+            },
+            {
+                "description": "Space as modifier, as itself when pressed alone",
+                "manipulators": [
+                    {
+                        "from": with_any_modifier("spacebar"),
+                        "to_if_held_down": [
+                            set_variable("spc_down", 1),
+                        ],
+                        "to_if_alone": [ 
+                            set_variable("spc_down", 0),
+                            { key_code: "spacebar", halt: true },
+                        ],
+                        to_after_key_up: [ 
+                            { key_code: "vk_none" },
+                            set_variable("spc_down", 0),
+                        ],
+                        "type": "basic"
+                    },
+                    {
+                        conditions: [ variable_if("spc_down", 1) ],
+                        "from": with_any_modifier("spacebar"),
+                        "to_after_key_up": [ set_variable("spc_down", 0) ],
+                        "type": "basic"
+                    },
+                    remap_spc_key("h", "left_arrow"),
+                    remap_spc_key("j", "down_arrow"),
+                    remap_spc_key("k", "up_arrow"),
+                    remap_spc_key("l", "right_arrow"),
+                    remap_spc_key("d", "delete_forward"),
+                    remap_spc_key("x", "delete_or_backspace"),
+                    remap_spc_with_modifiers("w", [], "delete_or_backspace", ["option"]),
+                    remap_spc_with_modifiers("a", [], "left_arrow", ["command"]),
+                    remap_spc_with_modifiers("e", [], "right_arrow", ["command"]),
+                    remap_spc_with_modifiers("n", [], "page_down", []),
+                    remap_spc_with_modifiers("p", [], "page_up", []),
+                ]
+            }
+        ]
+    },
+    "devices": [],
+    "fn_function_keys": [
+        {
+            "from": {
+                "key_code": "f1"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "display_brightness_decrement"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f2"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "display_brightness_increment"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f3"
+            },
+            "to": [
+                {
+                    "key_code": "mission_control"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f4"
+            },
+            "to": [
+                {
+                    "key_code": "launchpad"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f5"
+            },
+            "to": [
+                {
+                    "key_code": "illumination_decrement"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f6"
+            },
+            "to": [
+                {
+                    "key_code": "illumination_increment"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f7"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "rewind"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f8"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "play_or_pause"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f9"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "fast_forward"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f10"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "mute"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f11"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "volume_decrement"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "f12"
+            },
+            "to": [
+                {
+                    "consumer_key_code": "volume_increment"
+                }
+            ]
+        }
+    ],
+    "name": "spc",
+    "parameters": {
+        "delay_milliseconds_before_open_device": 1000
+    },
+    "selected": false,
+    "simple_modifications": [],
+    "virtual_hid_keyboard": {
+        "country_code": 0,
+        "indicate_sticky_modifier_keys_state": true,
+        "mouse_key_xy_scale": 100
+    }
+};
+
 let result = {
     "global": {
         "check_for_updates_on_startup": true,
@@ -3685,6 +3909,7 @@ let result = {
             }
         },
         vinav_rules,
+        spc_rules,
     ]
 };
 
