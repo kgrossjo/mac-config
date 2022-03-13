@@ -369,7 +369,7 @@ let spc_rules = {
             "basic.simultaneous_threshold_milliseconds": 50,
             "basic.to_delayed_action_delay_milliseconds": 500,
             "basic.to_if_alone_timeout_milliseconds": 1000,
-            "basic.to_if_held_down_threshold_milliseconds": 300,
+            "basic.to_if_held_down_threshold_milliseconds": 100,
             "mouse_motion_to_scroll.speed": 100
         },
         "rules": [
@@ -422,6 +422,9 @@ let spc_rules = {
                     remap_spc_key("l", "right_arrow"),
                     remap_spc_key("d", "delete_forward"),
                     remap_spc_key("x", "delete_or_backspace"),
+                    remap_spc_key("m", "return_or_enter"),
+                    remap_spc_key("open_bracket", "home"),
+                    remap_spc_key("close_bracket", "end"),
                     remap_spc_with_modifiers("w", [], "delete_or_backspace", ["option"]),
                     remap_spc_with_modifiers("a", [], "left_arrow", ["command"]),
                     remap_spc_with_modifiers("e", [], "right_arrow", ["command"]),
