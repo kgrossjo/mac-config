@@ -426,10 +426,14 @@ let spc_rules = {
                     remap_spc_key("open_bracket", "home"),
                     remap_spc_key("close_bracket", "end"),
                     remap_spc_with_modifiers("w", [], "delete_or_backspace", ["option"]),
+                    remap_spc_with_modifiers("y", [], "delete_forward", ["option"]),
                     remap_spc_with_modifiers("a", [], "left_arrow", ["command"]),
                     remap_spc_with_modifiers("e", [], "right_arrow", ["command"]),
                     remap_spc_with_modifiers("n", [], "page_down", []),
                     remap_spc_with_modifiers("p", [], "page_up", []),
+                    remap_spc_with_modifiers("comma", [], "left_arrow", ["option"]),
+                    remap_spc_with_modifiers("period", [], "right_arrow", ["option"]),
+                    remap_spc_with_modifiers("s", [], "spacebar", []),
                 ]
             }
         ]
