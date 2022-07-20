@@ -370,6 +370,8 @@ let spc_rules = {
                     remap_spc_key("m", "return_or_enter"),
                     remap_spc_key("open_bracket", "home"),
                     remap_spc_key("close_bracket", "end"),
+                    remap_spc_with_modifiers("comma", [], "left_arrow", ["option"]),
+                    remap_spc_with_modifiers("period", [], "right_arrow", ["option"]),
                     remap_spc_with_modifiers("w", [], "delete_or_backspace", ["option"]),
                     remap_spc_with_modifiers("y", [], "delete_forward", ["option"]),
                     remap_spc_with_modifiers("a", [], "left_arrow", ["command"]),
