@@ -779,6 +779,32 @@
                                 "conditions": [
                                     {
                                         "type": "variable_if",
+                                        "name": "caps_down",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "o",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "caps_ctrl",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
                                         "name": "caps_fn",
                                         "value": 1
                                     }
@@ -2901,8 +2927,8 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "normal_mode",
                                         "type": "variable_if",
+                                        "name": "normal_mode",
                                         "value": 0
                                     }
                                 ],
@@ -2925,6 +2951,12 @@
                                             "name": "normal_mode",
                                             "value": 1
                                         }
+                                    },
+                                    {
+                                        "set_notification_message": {
+                                            "id": "normal_mode",
+                                            "text": "VI normal mode"
+                                        }
                                     }
                                 ],
                                 "type": "basic"
@@ -2932,8 +2964,8 @@
                             {
                                 "conditions": [
                                     {
-                                        "name": "normal_mode",
                                         "type": "variable_if",
+                                        "name": "normal_mode",
                                         "value": 1
                                     }
                                 ],
@@ -2955,6 +2987,12 @@
                                         "set_variable": {
                                             "name": "normal_mode",
                                             "value": 0
+                                        }
+                                    },
+                                    {
+                                        "set_notification_message": {
+                                            "id": "normal_mode",
+                                            "text": ""
                                         }
                                     }
                                 ],
@@ -2981,6 +3019,12 @@
                                         "set_variable": {
                                             "name": "normal_mode",
                                             "value": 0
+                                        }
+                                    },
+                                    {
+                                        "set_notification_message": {
+                                            "id": "normal_mode",
+                                            "text": ""
                                         }
                                     }
                                 ],
@@ -3085,7 +3129,7 @@
             },
             "devices": [],
             "fn_function_keys": [],
-            "name": "CLnav",
+            "name": "CL",
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },

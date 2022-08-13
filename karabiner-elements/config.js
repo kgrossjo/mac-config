@@ -334,6 +334,17 @@ let spc_rules = {
     }
 };
 
+// -- CLnav --
+
+function clnav_show_message(msg) {
+    return {
+        set_notification_message: {
+            id: "normal_mode",
+            text: msg,
+        }
+    };
+}
+
 function remap_capsdown_key(from, to) {
     return remap_clnav_key(from, to, "caps_down");
 }
@@ -450,6 +461,12 @@ let clnav_rules = {
                         "to": [ set_variable("caps_ctrl", 1) ],
                         "type": "basic"
                     },
+                    {
+                        "conditions": [ variable_if("caps_down", 1) ],
+                        "from": with_any_modifier("o"),
+                        "to": [ set_variable("caps_ctrl", 1) ],
+                        "type": "basic"
+                    },
                     remap_capsfn("1", "f1"),
                     remap_capsfn("2", "f2"),
                     remap_capsfn("3", "f3"),
@@ -531,11 +548,7 @@ let clnav_rules = {
                 "manipulators": [
                     {
                         "conditions": [
-                            {
-                                "name": "normal_mode",
-                                "type": "variable_if",
-                                "value": 0
-                            }
+                            variable_if("normal_mode", 0),
                         ],
                         "from": {
                             "key_code": "left_command",
@@ -551,22 +564,14 @@ let clnav_rules = {
                             }
                         ],
                         "to_if_alone": [
-                            {
-                                "set_variable": {
-                                    "name": "normal_mode",
-                                    "value": 1
-                                }
-                            }
+                            set_variable("normal_mode", 1) ,
+                            clnav_show_message("VI normal mode"),
                         ],
                         "type": "basic"
                     },
                     {
                         "conditions": [
-                            {
-                                "name": "normal_mode",
-                                "type": "variable_if",
-                                "value": 1
-                            }
+                            variable_if("normal_mode", 1)
                         ],
                         "from": {
                             "key_code": "left_command",
@@ -582,12 +587,8 @@ let clnav_rules = {
                             }
                         ],
                         "to_if_alone": [
-                            {
-                                "set_variable": {
-                                    "name": "normal_mode",
-                                    "value": 0
-                                }
-                            }
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
                         ],
                         "type": "basic"
                     },
@@ -608,12 +609,8 @@ let clnav_rules = {
                             }
                         },
                         "to": [
-                            {
-                                "set_variable": {
-                                    "name": "normal_mode",
-                                    "value": 0
-                                }
-                            }
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
                         ],
                         "type": "basic"
                     },
@@ -717,7 +714,7 @@ let clnav_rules = {
     "devices": [],
     "fn_function_keys": [
     ],
-    "name": "CLnav",
+    "name": "CL",
     "parameters": {
         "delay_milliseconds_before_open_device": 1000
     },
