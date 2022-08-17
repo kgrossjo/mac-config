@@ -592,6 +592,8 @@ let clnav_rules = {
                     remap_capsctrl("return_or_enter", ["control"]),
                     remap_capsctrl("delete_or_backspace", ["control"]),
                     remap_capsctrl("slash", ["control"]),
+                    remap_capsctrl("return_or_enter", ["control"]),
+                    remap_capsctrl("delete_or_backspace", ["control"]),
                     remap_capsctrl("1", ["control"]),
                     remap_capsctrl("2", ["control"]),
                     remap_capsctrl("3", ["control"]),
@@ -652,6 +654,7 @@ let clnav_rules = {
                     remap_capsdown_with_modifier("period", "right_arrow", ["left_alt"]),
                     remap_capsdown("open_bracket", "home"),
                     remap_capsdown("close_bracket", "end"),
+					remap_capsdown("backslash", "caps_lock"),
                 ],
                 "type": "basic"
             },
