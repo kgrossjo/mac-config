@@ -479,16 +479,16 @@ let clnav_rules = {
                     remap_capsfn("0", "f10"),
                     remap_capsfn("hyphen", "f11"),
                     remap_capsfn("equal_sign", "f12"),
-                    remap_capsctrl("semicolon", ["control"]),
-                    remap_capsctrl("quote", ["control"]),
-                    remap_capsctrl("backslash", ["control"]),
-                    remap_capsctrl("hyphen", ["control"]),
-                    remap_capsctrl("equal_sign", ["control"]),
-                    remap_capsctrl("comma", ["control"]),
-                    remap_capsctrl("period", ["control"]),
-                    remap_capsctrl("slash", ["control"]),
-                    remap_capsctrl("return_or_enter", ["control"]),
-                    remap_capsctrl("delete_or_backspace", ["control"]),
+                    remap_capsctrl("semicolon", ["control"]),
+                    remap_capsctrl("quote", ["control"]),
+                    remap_capsctrl("backslash", ["control"]),
+                    remap_capsctrl("hyphen", ["control"]),
+                    remap_capsctrl("equal_sign", ["control"]),
+                    remap_capsctrl("comma", ["control"]),
+                    remap_capsctrl("period", ["control"]),
+                    remap_capsctrl("slash", ["control"]),
+                    remap_capsctrl("return_or_enter", ["control"]),
+                    remap_capsctrl("delete_or_backspace", ["control"]),
                     remap_capsctrl("slash", ["control"]),
                     remap_capsctrl("1", ["control"]),
                     remap_capsctrl("2", ["control"]),
@@ -560,14 +560,7 @@ let clnav_rules = {
                         "conditions": [
                             variable_if("normal_mode", 0),
                         ],
-                        "from": {
-                            "key_code": "left_command",
-                            "modifiers": {
-                                "optional": [
-                                    "any"
-                                ]
-                            }
-                        },
+                        "from": with_any_modifier("left_command"),
                         "to": [
                             {
                                 "key_code": "left_command"
@@ -581,19 +574,44 @@ let clnav_rules = {
                     },
                     {
                         "conditions": [
+                            variable_if("normal_mode", 0),
+                        ],
+                        "from": with_any_modifier("right_command"),
+                        "to": [
+                            {
+                                "key_code": "right_command"
+                            }
+                        ],
+                        "to_if_alone": [
+                            set_variable("normal_mode", 1) ,
+                            clnav_show_message("VI normal mode"),
+                        ],
+                        "type": "basic"
+                    },
+                    {
+                        "conditions": [
                             variable_if("normal_mode", 1)
                         ],
-                        "from": {
-                            "key_code": "left_command",
-                            "modifiers": {
-                                "optional": [
-                                    "any"
-                                ]
-                            }
-                        },
+                        "from": with_any_modifier("left_command"),
                         "to": [
                             {
                                 "key_code": "left_command"
+                            }
+                        ],
+                        "to_if_alone": [
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
+                        ],
+                        "type": "basic"
+                    },
+                    {
+                        "conditions": [
+                            variable_if("normal_mode", 1)
+                        ],
+                        "from": with_any_modifier("right_command"),
+                        "to": [
+                            {
+                                "key_code": "right_command"
                             }
                         ],
                         "to_if_alone": [

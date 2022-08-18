@@ -3286,6 +3286,43 @@
                                     {
                                         "type": "variable_if",
                                         "name": "normal_mode",
+                                        "value": 0
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "set_variable": {
+                                            "name": "normal_mode",
+                                            "value": 1
+                                        }
+                                    },
+                                    {
+                                        "set_notification_message": {
+                                            "id": "normal_mode",
+                                            "text": "VI normal mode"
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "normal_mode",
                                         "value": 1
                                     }
                                 ],
@@ -3300,6 +3337,43 @@
                                 "to": [
                                     {
                                         "key_code": "left_command"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "set_variable": {
+                                            "name": "normal_mode",
+                                            "value": 0
+                                        }
+                                    },
+                                    {
+                                        "set_notification_message": {
+                                            "id": "normal_mode",
+                                            "text": ""
+                                        }
+                                    }
+                                ],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "type": "variable_if",
+                                        "name": "normal_mode",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": {
+                                    "key_code": "right_command",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "right_command"
                                     }
                                 ],
                                 "to_if_alone": [
