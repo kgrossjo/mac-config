@@ -467,6 +467,12 @@ let clnav_rules = {
                         "to": [ set_variable("caps_ctrl", 1) ],
                         "type": "basic"
                     },
+                    {
+                        "from": with_any_modifier("slash"),
+                        "to_if_alone": [ { key_code: "slash" } ],
+                        "to_if_held_down": [ { "key_code": "left_control" } ],
+                        type: "basic",
+                    },
                     remap_capsfn("1", "f1"),
                     remap_capsfn("2", "f2"),
                     remap_capsfn("3", "f3"),
