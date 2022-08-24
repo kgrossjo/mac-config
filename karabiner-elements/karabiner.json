@@ -817,7 +817,7 @@
                                 ],
                                 "to_if_held_down": [
                                     {
-                                        "key_code": "left_control"
+                                        "key_code": "right_control"
                                     }
                                 ],
                                 "type": "basic"

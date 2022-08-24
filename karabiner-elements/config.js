@@ -470,7 +470,7 @@ let clnav_rules = {
                     {
                         "from": with_any_modifier("slash"),
                         "to_if_alone": [ { key_code: "slash" } ],
-                        "to_if_held_down": [ { "key_code": "left_control" } ],
+                        "to_if_held_down": [ { "key_code": "right_control" } ],
                         type: "basic",
                     },
                     remap_capsfn("1", "f1"),
