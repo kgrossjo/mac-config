@@ -443,6 +443,16 @@ let clnav_rules = {
                         "type": "basic"
                     },
                     {
+                        from: with_any_modifier("return_or_enter"),
+                        to: [ set_variable("caps_down", 1) ],
+                        to_after_key_up: [ set_variable("caps_down", 0) ],
+                        to_if_alone: [
+                            set_variable("caps_down", 0),
+                            { key_code: "return_or_enter" },
+                        ],
+                        type: "basic",
+                    },
+                    {
                         "conditions": [ variable_if("caps_down", 1), ],
                         "from": with_any_modifier("caps_lock"),
                         "to": [ set_variable("caps_down", 0) ],
