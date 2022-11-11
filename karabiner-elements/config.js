@@ -632,11 +632,7 @@ let clnav_rules = {
                             variable_if("normal_mode", 1)
                         ],
                         "from": with_any_modifier("right_command"),
-                        "to": [
-                            {
-                                "key_code": "right_command"
-                            }
-                        ],
+                        "to": [ { "key_code": "right_command" } ],
                         "to_if_alone": [
                             set_variable("normal_mode", 0),
                             clnav_show_message(""),
@@ -644,26 +640,52 @@ let clnav_rules = {
                         "type": "basic"
                     },
                     {
-                        "conditions": [
-                            {
-                                "name": "normal_mode",
-                                "type": "variable_if",
-                                "value": 1
-                            }
-                        ],
-                        "from": {
-                            "key_code": "escape",
-                            "modifiers": {
-                                "optional": [
-                                    "any"
-                                ]
-                            }
-                        },
+                        "conditions": [ variable_if("normal_mode", 1) ],
+                        "from": with_any_modifier("escape"),
                         "to": [
                             set_variable("normal_mode", 0),
                             clnav_show_message(""),
                         ],
                         "type": "basic"
+                    },
+                    {
+                        conditions: [ variable_if("normal_mode", 1) ],
+                        from: with_exact_modifiers("i", []),
+                        to: [
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
+                        ],
+                        type: "basic"
+                    },
+                    {
+                        conditions: [ variable_if("normal_mode", 1) ],
+                        from: with_exact_modifiers("i", ["shift"]),
+                        to: [
+                            { key_code: "left_arrow", modifiers: ["command"] },
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
+                        ],
+                        type: "basic"
+                    },
+                    {
+                        conditions: [ variable_if("normal_mode", 1) ],
+                        from: with_exact_modifiers("a", []),
+                        to: [
+                            { key_code: "right_arrow" },
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
+                        ],
+                        type: "basic"
+                    },
+                    {
+                        conditions: [ variable_if("normal_mode", 1) ],
+                        from: with_exact_modifiers("a", ["shift"]),
+                        to: [
+                            { key_code: "right_arrow", modifiers: ["command"] },
+                            set_variable("normal_mode", 0),
+                            clnav_show_message(""),
+                        ],
+                        type: "basic"
                     },
                     {
                         "conditions": [
