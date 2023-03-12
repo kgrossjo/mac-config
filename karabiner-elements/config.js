@@ -242,14 +242,79 @@ function remap_spc_with_modifiers(from, from_modifiers, to, to_modifiers) {
         type: "basic",
     };
 }
+let cherryKeyboard = {
+    "disable_built_in_keyboard_if_exists": false,
+    "fn_function_keys": [],
+    "identifiers": {
+        "is_keyboard": true,
+        "is_pointing_device": false,
+        "product_id": 384,
+        "vendor_id": 1130
+    },
+    "ignore": false,
+    "manipulate_caps_lock_led": true,
+    "simple_modifications": [
+        {
+            "from": {
+                "key_code": "left_option"
+            },
+            "to": [
+                {
+                    "key_code": "left_command"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "left_command"
+            },
+            "to": [
+                {
+                    "key_code": "left_option"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "right_option"
+            },
+            "to": [
+                {
+                    "key_code": "right_command"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "right_command"
+            },
+            "to": [
+                {
+                    "key_code": "right_option"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "application"
+            },
+            "to": [
+                {
+                    "key_code": "right_option"
+                }
+            ]
+        }
+    ],
+    "treat_as_built_in_keyboard": false
+};
 
 let spc_rules = {
     "complex_modifications": {
         "parameters": {
             "basic.simultaneous_threshold_milliseconds": 50,
-            "basic.to_delayed_action_delay_milliseconds": 500,
-            "basic.to_if_alone_timeout_milliseconds": 1000,
-            "basic.to_if_held_down_threshold_milliseconds": 150,
+            "basic.to_delayed_action_delay_milliseconds": 300,
+            "basic.to_if_alone_timeout_milliseconds": 500,
+            "basic.to_if_held_down_threshold_milliseconds": 100,
             "mouse_motion_to_scroll.speed": 100
         },
         "rules": [
@@ -281,12 +346,12 @@ let spc_rules = {
                             set_variable("spc_down", 1),
                         ],
                         "to_if_alone": [ 
-                            set_variable("spc_down", 0),
                             { key_code: "spacebar", halt: true },
+                            set_variable("spc_down", 0),
                         ],
                         to_after_key_up: [ 
-                            { key_code: "vk_none" },
                             set_variable("spc_down", 0),
+                            { key_code: "vk_none" },
                         ],
                         "type": "basic"
                     },
@@ -318,7 +383,7 @@ let spc_rules = {
             }
         ]
     },
-    "devices": [],
+    "devices": [cherryKeyboard],
     "fn_function_keys": [
     ],
     "name": "spc",
@@ -785,71 +850,7 @@ let clnav_rules = {
         ]
     },
     "devices": [
-        {
-            "disable_built_in_keyboard_if_exists": false,
-            "fn_function_keys": [],
-            "identifiers": {
-                "is_keyboard": true,
-                "is_pointing_device": false,
-                "product_id": 384,
-                "vendor_id": 1130
-            },
-            "ignore": false,
-            "manipulate_caps_lock_led": true,
-            "simple_modifications": [
-                {
-                    "from": {
-                        "key_code": "left_option"
-                    },
-                    "to": [
-                        {
-                            "key_code": "left_command"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "left_command"
-                    },
-                    "to": [
-                        {
-                            "key_code": "left_option"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "right_option"
-                    },
-                    "to": [
-                        {
-                            "key_code": "right_command"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "right_command"
-                    },
-                    "to": [
-                        {
-                            "key_code": "right_option"
-                        }
-                    ]
-                },
-                {
-                    "from": {
-                        "key_code": "application"
-                    },
-                    "to": [
-                        {
-                            "key_code": "right_option"
-                        }
-                    ]
-                }
-            ],
-            "treat_as_built_in_keyboard": false
-        }
+        cherryKeyboard
     ],
     "fn_function_keys": [
     ],
