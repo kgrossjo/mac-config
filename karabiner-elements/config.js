@@ -308,6 +308,62 @@ let cherryKeyboard = {
     "treat_as_built_in_keyboard": false
 };
 
+let happyHackingKeyboard = {
+    "disable_built_in_keyboard_if_exists": false,
+    "fn_function_keys": [],
+    "identifiers": {
+        "is_keyboard": true,
+        "is_pointing_device": false,
+        "product_id": 101,
+        "vendor_id": 1138
+    },
+    "ignore": false,
+    "manipulate_caps_lock_led": true,
+    "simple_modifications": [
+        {
+            "from": {
+                "key_code": "left_option"
+            },
+            "to": [
+                {
+                    "key_code": "left_command"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "left_command"
+            },
+            "to": [
+                {
+                    "key_code": "left_option"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "right_option"
+            },
+            "to": [
+                {
+                    "key_code": "right_command"
+                }
+            ]
+        },
+        {
+            "from": {
+                "key_code": "right_command"
+            },
+            "to": [
+                {
+                    "key_code": "right_option"
+                }
+            ]
+        }
+    ],
+    "treat_as_built_in_keyboard": false
+};
+
 let spc_rules = {
     "complex_modifications": {
         "parameters": {
@@ -334,6 +390,26 @@ let spc_rules = {
                             }
                         ],
                         "type": "basic"
+                    },
+                    {
+                        from: with_any_modifier("left_control"),
+                        to: [
+                            { key_code: "left_control" }
+                        ],
+                        to_if_alone: [
+                            { key_code: "escape" }
+                        ],
+                        type: "basic"
+                    },
+                    {
+                        from: with_any_modifier("return_or_enter"),
+                        to: [
+                            { key_code: "left_control" }
+                        ],
+                        to_if_alone: [
+                            { key_code: "return_or_enter" }
+                        ],
+                        type: "basic"
                     }
                 ]
             },
@@ -397,7 +473,7 @@ let spc_rules = {
             }
         ]
     },
-    "devices": [cherryKeyboard],
+    "devices": [cherryKeyboard, happyHackingKeyboard],
     "fn_function_keys": [
     ],
     "name": "spc",
