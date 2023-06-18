@@ -378,37 +378,21 @@ let spc_rules = {
                 "description": "Change caps_lock to control if pressed with other keys, to escape if pressed alone.",
                 "manipulators": [
                     {
-                        "from": with_any_modifier("caps_lock"),
-                        "to": [
-                            {
-                                "key_code": "left_control"
-                            }
-                        ],
-                        "to_if_alone": [
-                            {
-                                "key_code": "escape"
-                            }
-                        ],
-                        "type": "basic"
+                        from: with_any_modifier("caps_lock"),
+                        to: [ { key_code: "left_control" } ],
+                        to_if_alone: [ { key_code: "escape" } ],
+                        type: "basic"
                     },
                     {
                         from: with_any_modifier("left_control"),
-                        to: [
-                            { key_code: "left_control" }
-                        ],
-                        to_if_alone: [
-                            { key_code: "escape" }
-                        ],
+                        to: [ { key_code: "left_control" } ],
+                        to_if_alone: [ { key_code: "escape" } ],
                         type: "basic"
                     },
                     {
                         from: with_any_modifier("return_or_enter"),
-                        to: [
-                            { key_code: "left_control" }
-                        ],
-                        to_if_alone: [
-                            { key_code: "return_or_enter" }
-                        ],
+                        to: [ { key_code: "left_control" } ],
+                        to_if_alone: [ { key_code: "return_or_enter" } ],
                         type: "basic"
                     }
                 ]
@@ -417,11 +401,11 @@ let spc_rules = {
                 "description": "Space as modifier, as itself when pressed alone",
                 "manipulators": [
                     {
-                        "from": with_any_modifier("spacebar"),
-                        "to_if_held_down": [
+                        from: with_any_modifier("spacebar"),
+                        to_if_held_down: [
                             set_variable("spc_down", 1),
                         ],
-                        "to_if_alone": [ 
+                        to_if_alone: [ 
                             { key_code: "spacebar", halt: true },
                             set_variable("spc_down", 0),
                         ],
@@ -429,13 +413,13 @@ let spc_rules = {
                             set_variable("spc_down", 0),
                             { key_code: "vk_none" },
                         ],
-                        "type": "basic"
+                        type: "basic"
                     },
                     {
                         conditions: [ variable_if("spc_down", 1) ],
-                        "from": with_any_modifier("spacebar"),
-                        "to_after_key_up": [ set_variable("spc_down", 0) ],
-                        "type": "basic"
+                        from: with_any_modifier("spacebar"),
+                        to_after_key_up: [ set_variable("spc_down", 0) ],
+                        type: "basic"
                     },
                     remap_spc_key("h", "left_arrow"),
                     remap_spc_key("j", "down_arrow"),
@@ -463,7 +447,9 @@ let spc_rules = {
                     remap_spc_with_modifiers("w", [], "delete_or_backspace", ["option"]),
                     remap_spc_with_modifiers("y", [], "delete_forward", ["option"]),
                     remap_spc_with_modifiers("a", [], "left_arrow", ["command"]),
+                    remap_spc_with_modifiers("a", ["shift"], "left_arrow", ["command", "shift"]),
                     remap_spc_with_modifiers("e", [], "right_arrow", ["command"]),
+                    remap_spc_with_modifiers("e", ["shift"], "right_arrow", ["command", "shift"]),
                     remap_spc_with_modifiers("n", [], "page_down", []),
                     remap_spc_with_modifiers("p", [], "page_up", []),
                     remap_spc_with_modifiers("comma", [], "left_arrow", ["option"]),
