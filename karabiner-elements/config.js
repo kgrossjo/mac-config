@@ -320,7 +320,7 @@ let happyHackingKeyboard = {
     "ignore": false,
     "manipulate_caps_lock_led": true,
     "simple_modifications": [
-        {
+        /* {
             "from": {
                 "key_code": "left_option"
             },
@@ -359,10 +359,79 @@ let happyHackingKeyboard = {
                     "key_code": "right_option"
                 }
             ]
-        }
+        } */
     ],
     "treat_as_built_in_keyboard": false
 };
+
+let vimodifier_manipulators = {
+    description: "cmd as vi toggle",
+    manipulators: [
+        {
+            conditions: [ variable_if("vinav", 0) ],
+            from: with_any_modifier("left_command"),
+            to: [
+                { key_code: "left_command" },
+                set_variable("vinav", 0),
+                
+            ],
+            to_if_alone: [
+                set_variable("vinav", 1),
+                show_message("VI"),
+            ],
+            type: "basic",
+        },
+        {
+            conditions: [ variable_if("vinav", 0) ],
+            from: with_any_modifier("right_command"),
+            to: [
+                { key_code: "right_command" },
+                set_variable("vinav", 0),
+                
+            ],
+            to_if_alone: [
+                set_variable("vinav", 1),
+                show_message("VI"),
+            ],
+            type: "basic",
+        },
+        {
+            conditions: [ variable_if("vinav", 1) ],
+            from: with_any_modifier("left_command"),
+            to: [ { key_code: "left_command" } ],
+            to_if_alone: [
+                set_variable("vinav", 0),
+                show_message(""),
+            ],
+            type: "basic",
+        },
+        {
+            conditions: [ variable_if("vinav", 1) ],
+            from: with_any_modifier("right_command"),
+            to: [ { key_code: "right_command" } ],
+            to_if_alone: [
+                set_variable("vinav", 0),
+                show_message(""),
+            ],
+            type: "basic",
+        },
+        remap_vinav_key("h", "left_arrow"),
+        remap_vinav_key("j", "down_arrow"),
+        remap_vinav_key("k", "up_arrow"),
+        remap_vinav_key("l", "right_arrow"),
+        remap_vinav_with_modifiers("g", [], "up_arrow", ["command"]),
+        remap_vinav_with_modifiers("g", ["shift"], "down_arrow", ["command"]),
+        remap_vinav_with_modifiers("x", [], "delete_forward", []),
+        remap_vinav_with_modifiers("x", ["shift"], "delete_or_backspace", []),
+        remap_vinav_with_modifiers("w", [], "right_arrow", ["option"]),
+        remap_vinav_with_modifiers("b", [], "left_arrow", ["option"]),
+        remap_vinav_with_modifiers_and_exit("a", ["shift"], "right_arrow", ["command"]),
+        remap_vinav_with_modifiers_and_exit("i", ["shift"], "left_arrow", ["command"]),
+        remap_vinav_with_modifiers("n", [], "page_down", []),
+        remap_vinav_with_modifiers("p", [], "page_up", []),
+    ]
+};
+
 
 let spc_rules = {
     "complex_modifications": {
@@ -455,8 +524,9 @@ let spc_rules = {
                     remap_spc_with_modifiers("comma", [], "left_arrow", ["option"]),
                     remap_spc_with_modifiers("period", [], "right_arrow", ["option"]),
                     remap_spc_with_modifiers("s", [], "spacebar", []),
+                    remap_spc_with_modifiers("tab", [], "tab", ["option"]),
                 ]
-            }
+            },
         ]
     },
     "devices": [cherryKeyboard, happyHackingKeyboard],
