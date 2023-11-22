@@ -559,14 +559,19 @@ let keychron_rules = {
                         to_if_alone: [ { key_code: "escape" } ],
                         type: "basic"
                     },
-                    {
-                        from: with_any_modifier("return_or_enter"),
-                        to: [ { key_code: "left_control" } ],
-                        to_if_alone: [ { key_code: "return_or_enter" } ],
-                        type: "basic"
-                    }
                 ]
             },
+			{
+				description: "Change return to alt if pressed with other keys, to return if pressed alone.",
+				manipulators: [
+					{
+						from: with_any_modifier("return_or_enter"),
+						to: [ { key_code: "left_alt" } ],
+						to_if_alone: [ { key_code: "return_or_enter" } ],
+						type: "basic"
+					},
+				]
+			}
         ]
     },
     "devices": [keychronKeyboard, keychronKeyboardPointing],
